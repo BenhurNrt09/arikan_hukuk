@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(cuid())
+  email    String @unique
+  password String // Hashed
+  name     String?
+}
+
+model Post {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String?
+  content     String
+  coverImage  String? // R2 URL
+  publishedAt DateTime @default(now())
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  String
+}
+
+model Category {
+  id    String @id @default(cuid())
+  name  String // Blog, Makale, Köşe Yazısı
+  slug  String @unique
+  posts Post[]
+}
+
+model SiteSettings {
+  id               String @id @default(cuid())
+  phone            String?
+  email            String?
+  address          String?
+  googleMapsUrl    String?
+  appointmentPhone String?
+}
