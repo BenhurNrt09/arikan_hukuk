@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "prisma:seed": "prisma db seed",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:reset": "prisma migrate reset"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.982.0",
@@ -33,5 +36,8 @@
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"commonjs\"} prisma/seed.ts"
   }
 }
