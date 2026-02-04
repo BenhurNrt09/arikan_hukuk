@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 
 export default async function HomePage() {
+    console.log('DEBUG PAGE: process.env.DATABASE_URL =', process.env.DATABASE_URL)
     const recentPosts = await prisma.post.findMany({
         take: 3,
         include: { category: true },
